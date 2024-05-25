@@ -1,0 +1,64 @@
+@media (max-width: 990px) {
+
+
+    .right {
+        float: none;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .banner-ad-left p {
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+
+    .header-admin-left,
+    .header-admin-right {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .header-admin-right h4,
+    .header-admin-left h4 {
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .product {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .col-product {
+        width: 48%;
+        /* Chiếm 48% chiều rộng để hiển thị 2 sản phẩm mỗi hàng */
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .item-product img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Đặt thêm media query cho màn hình nhỏ hơn, ví dụ: điện thoại */
+@media (max-width: 768px) {
+    .col-product {
+        width: 48%;
+        /* Đảm bảo 2 sản phẩm mỗi hàng */
+    }
+}
+
+@media (max-width: 480px) {
+    .col-product {
+        width: 100%;
+        /* Với màn hình nhỏ hơn, hiển thị 1 sản phẩm mỗi hàng */
+    }
+}
