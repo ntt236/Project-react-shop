@@ -1,8 +1,13 @@
-import { DELETE_USER, DELETE_USER_ERROR } from "../constants/deleteUser";
+import {
+  DELETE_ORDER,
+  DELETE_USER,
+  DELETE_USER_ERROR,
+} from "../constants/deleteUser";
 
 const initialState = {
   user: [],
   error: "",
+  order: [],
 };
 const deleteReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,6 +15,11 @@ const deleteReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case DELETE_ORDER:
+      return {
+        ...state,
+        order: action.payload,
       };
     case DELETE_USER_ERROR:
       return {

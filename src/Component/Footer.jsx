@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <div className="container-fluid my-5">
+      <div
+        className="container-fluid my-5"
+        style={{ marginTop: "15rem!important" }}
+      >
         <footer
           className="bg-white text-center text-lg-start text-white"
           style={{ borderTop: "1px solid black " }}
@@ -20,24 +23,6 @@ const Footer = () => {
                     <img src={Logo} height={70} alt loading="lazy" />
                   </Link>
                 </div>
-
-                <ul className="list-unstyled d-flex flex-row justify-content-center">
-                  <li>
-                    <a className="text-white px-2" href="#!">
-                      <i className="fab fa-facebook-square" />
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white px-2" href="#!">
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </li>
-                  <li>
-                    <a className="text-white ps-2" href="#!">
-                      <i className="fab fa-youtube" />
-                    </a>
-                  </li>
-                </ul>
               </div>
               <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <h4 className="text-uppercase mb-4 text-black">
@@ -51,19 +36,19 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/vot" className="text-black">
+                    <Link to="/giay" className="text-black">
                       <i className="fas fa-paw pe-3" />
                       GIÀY CẦU LÔNG
                     </Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/vot" className="text-black">
+                    <Link to="/ao" className="text-black">
                       <i className="fas fa-paw pe-3" />
                       ÁO CẦU LÔNG
                     </Link>
                   </li>
                   <li className="mb-2">
-                    <Link to="/vot" className="text-black">
+                    <Link to="/quan" className="text-black">
                       <i className="fas fa-paw pe-3" />
                       QUẦN CẦU LÔNG
                     </Link>
@@ -116,7 +101,7 @@ const Footer = () => {
             className="text-center p-3"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
           >
-            © 2020 Copyright:
+            © 2024 Copyright:
             <a className="text-white"></a>
           </div>
         </footer>

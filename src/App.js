@@ -28,12 +28,16 @@ import StoreGiay from "./Component/StoreGiay";
 import ThanhToan from "./Component/ThanhToan";
 import ThongtinDonHang from "./Component/ThongtinDonHang";
 import DonHangAdmin from "./Component/DonHangAdmin";
+import PublicRoute from "./HOC/PublicRoute";
 function App() {
   return (
     <Routes>
       <Route path="/register" element={<Register />} />
 
-      <Route path="/login" element={<Login />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/login" element={<Login />} />
+      </Route>
+      <Route path="/" exact element={<Home />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/cart/thanhtoan" element={<ThanhToan />} />
       <Route element={<PrivateRoute />}>
@@ -42,8 +46,9 @@ function App() {
         <Route path="/admin/manager-products" element={<TableProductAdmin />} />
         <Route path="/admin/quanlydonhang" element={<DonHangAdmin />} />
       </Route>
-      <Route path="/" exact element={<Home />} />
+
       <Route path="/product/:productId" element={<DetailProduct />} />
+      <Route path="/productsell/:productId" element={<DetailProduct />} />
 
       <Route path="vot" element={<StroreVot />} />
       <Route path="ao" element={<StoreAo />} />

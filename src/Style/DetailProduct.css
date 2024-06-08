@@ -23,6 +23,7 @@ img {
     .preview {
         margin-bottom: 20px;
     }
+
 }
 
 .py-5 {
@@ -87,6 +88,8 @@ img {
         display: -ms-flexbox;
         display: flex;
     }
+
+
 }
 
 .details {

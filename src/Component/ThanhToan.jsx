@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatPrice } from "../utils/common";
 import axios from "axios";
 import axiosInstance from "../api/axiosInstance";
@@ -10,11 +10,24 @@ import Footer from "./Footer";
 const ThanhToan = () => {
   const getUser = JSON.parse(localStorage.getItem("user"));
 
-  const getCart = JSON.parse(localStorage.getItem("cart"));
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const getApi = async () => {
+      try {
+        const response = await axiosInstance.get(`/cart?userId=${getUser.id}`);
+        setCart(response);
+      } catch (error) {
+        console.log("🚀 ~ getApi ~ error:", error);
+      }
+    };
+
+    getApi();
+  }, [getUser?.id]);
 
   const totalPrice =
-    getCart && getCart.length > 0
-      ? getCart.reduce((total, item) => {
+    cart && cart.length > 0
+      ? cart.reduce((total, item) => {
           return total + Number(item.price) * Number(item.soluong);
         }, 0)
       : 0;
@@ -23,10 +36,16 @@ const ThanhToan = () => {
   const [address, setAddress] = useState("");
 
   const navigate = useNavigate();
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
+      if (!getUser) {
+        alert("Vui lòng đăng nhập để đặt hàng");
+        navigate("/");
+      }
+
       const data = {
-        nameProduct: getCart[0]?.name,
+        nameProduct: cart[0]?.name,
         phone: phoneNumber,
         address: address,
         email: getUser.email,
@@ -34,11 +53,16 @@ const ThanhToan = () => {
         date: new Date(),
         status: "Đang chờ xác nhận",
       };
-      console.log("🚀 ~ handleSubmit ~ data:", data);
-      const res = await axiosInstance.post("/order", data);
-      alert("Đã đặt hàng thành công!");
 
-      navigate("/thongtindonhang");
+      await axiosInstance.post("/order", data);
+      alert("Đã đặt hàng thành công!");
+      const fetchCart = await axiosInstance.get("cart");
+      const filterCart = fetchCart.filter((cart) => cart.userId === getUser.id);
+
+      for (let index = 0; index < filterCart.length; index++) {
+        await axiosInstance.delete(`cart/${filterCart[index]?.id}`);
+        navigate("/thongtindonhang");
+      }
     } catch (error) {
       console.log("🚀 ~ handleSubmit ~ error:", error);
     }
@@ -48,7 +72,7 @@ const ThanhToan = () => {
       <div>
         <Header />
         <div className="container mt-4">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="py-5 text-center">
               <i className="fa fa-credit-card fa-4x" aria-hidden="true" />
               <h2>Thanh toán</h2>
@@ -63,7 +87,7 @@ const ThanhToan = () => {
                   <span className="text-muted">Giỏ hàng</span>
                   <span className="badge badge-secondary badge-pill">2</span>
                 </h4>
-                {getCart.map((item, index) => {
+                {cart.map((item, index) => {
                   const total = formatPrice(
                     Number(item.price) * Number(item.soluong)
                   );
@@ -81,7 +105,13 @@ const ThanhToan = () => {
                     </ul>
                   );
                 })}
-                <p>Tổng tiền phải trả là: {totalPrice}đ</p>
+                <p style={{ fontSize: "16px" }}>
+                  Tổng tiền phải trả là
+                  <span style={{ color: "red" }}>
+                    {" "}
+                    {formatPrice(totalPrice)}đ
+                  </span>
+                </p>
               </div>
               <div className="col-md-8 order-md-1">
                 <h4 className="mb-3">Thông tin khách hàng</h4>
@@ -94,7 +124,7 @@ const ThanhToan = () => {
                       name="kh_ten"
                       id="kh_ten"
                       readOnly
-                      value={getUser.fullname}
+                      value={getUser?.fullname}
                     />
                   </div>
                   <div className="col-md-12">
@@ -128,8 +158,7 @@ const ThanhToan = () => {
                       className="form-control"
                       name="kh_email"
                       id="kh_email"
-                      readOnly
-                      value={getUser.email}
+                      value={getUser?.email}
                     />
                   </div>
                 </div>
@@ -161,8 +190,7 @@ const ThanhToan = () => {
                 <hr className="mb-4" />
                 <Button
                   className="btn btn-primary btn-lg btn-block"
-                  onClick={handleSubmit}
-                  type="button"
+                  type="submit"
                 >
                   Đặt hàng
                 </Button>

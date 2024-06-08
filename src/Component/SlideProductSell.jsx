@@ -38,7 +38,7 @@ const SlideProductSell = () => {
   };
 
   const dispatch = useDispatch();
-  const productsell = useSelector((state) => state.fetchDataHome.productsell);
+  const productSell = useSelector((state) => state.fetchDataHome.productSell);
 
   useEffect(() => {
     dispatch(fetchProductSelling());
@@ -46,17 +46,17 @@ const SlideProductSell = () => {
 
   return (
     <Slider {...settings}>
-      {productsell.map((product) => (
+      {productSell.map((product) => (
         <div key={product.id} className="col-product">
           <div className="product-new">
             <div className="item-product">
-              <Link to={`/product/${product.id}`}>
+              <Link to={`/productsell/${product.id}`}>
                 <img src={product.image} alt={product.name} />
               </Link>
             </div>
             <div className="info">
               <div className="product-info">
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/productsell/${product.id}`}>
                   <div className="name-product">
                     <div className="abc">
                       <div className="ae">{product.name}</div>

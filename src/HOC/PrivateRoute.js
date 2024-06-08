@@ -18,9 +18,8 @@ const PrivateRoute = () => {
   }, [dispatch]);
 
   if (isRestoring) {
-    return null; // or a loading spinner
+    return <div>Loading...</div>;
   }
-
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 

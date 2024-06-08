@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Style/Home.css";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Logo from "../Img/lgooo.png";
 import quan from "../Img/quan.jpg";
 import slideshop from "../Img/slideShop.png";
@@ -171,9 +171,9 @@ const Home = () => {
                 <CurrencyExchangeOutlinedIcon className="icon" />
               </div>
               <div className="title">
-                <span> SẢN PHẨM ĐỔI MỚI</span>
+                <span> THANH TOÁN TIỆN LỢI</span>
                 <br />
-                Nếu lỗi sản phẩm
+                với nhiều phương thức
               </div>
             </div>
           </div>
@@ -196,25 +196,20 @@ const Home = () => {
             </div>
           </div>
           <SlideProduct />
-        </div>
-        {/* <div className="container">
-          <div className="row">
-            <div>
-              <h3
-                style={{
-                  color: "red",
-                  font: "revert-layer",
-                  fontSize: "xx-large",
-                }}
-              >
-                SẢN PHẨM BÁN CHẠY
-              </h3>
-            </div>
-          </div>
-          <SlideProductSell />
-        </div> */}
-      </section>
 
+          <h3
+            style={{
+              color: "red",
+              font: "revert-layer",
+              fontSize: "xx-large",
+            }}
+          >
+            SẢN PHẨM BÁN CHẠY NHẤT
+          </h3>
+
+          <SlideProductSell />
+        </div>
+      </section>
       <Footer />
     </div>
   );
