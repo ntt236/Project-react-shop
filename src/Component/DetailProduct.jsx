@@ -9,9 +9,11 @@ import {
   fetchProductsDetail2,
   fetchProductsDetail3,
   fetchProductsDetail4,
+  fetchProductSellHome,
 } from "../stores/actions/fetchDataHomeAction";
 import { formatPrice } from "../utils/common";
 import Footer from "./Footer";
+import axiosInstance from "../api/axiosInstance";
 
 const DetailProduct = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,9 @@ const DetailProduct = () => {
   const location = useLocation();
 
   const productId = params.productId || "";
+
   const [quantity, setQuantity] = useState(1);
+
   useEffect(() => {
     if (productId) {
       if (location.pathname.includes("/vot/")) {
@@ -33,35 +37,56 @@ const DetailProduct = () => {
         dispatch(fetchProductsDetail3(productId));
       } else if (location.pathname.includes("/giay/")) {
         dispatch(fetchProductsDetail4(productId));
+      } else if (location.pathname.includes("/productsell/")) {
+        dispatch(fetchProductSellHome(productId));
       } else {
         dispatch(fetchProductsDetail(productId));
       }
     }
   }, [dispatch, productId, location.pathname]);
 
-  const themgiohang = () => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      alert("Vui lòng đăng nhập để thêm vào giỏ hàng");
-      return;
-    } else {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const themgiohang = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
 
-      const index = cart.findIndex((item) => item.id === productId);
-      if (index !== -1) {
-        cart[index].soluong += quantity;
+      if (!user) {
+        alert("Vui lòng đăng nhập để thêm vào giỏ hàng");
+        return;
+      }
+      if (quantity < 0 || quantity === 0) {
+        alert("Vui lòng nhập số lượng sản phẩm lớn hơn hoặc bằng 1");
+        return;
+      }
+
+      const cartResponse = await axiosInstance.get("/cart");
+      console.log("🚀 ~ themgiohang ~ cartResponse:", cartResponse);
+      const cart = cartResponse.find(
+        (item) => item.productId === productId && item.userId === user.id
+      );
+      console.log("🚀 ~ themgiohang ~ cart:", cart);
+
+      if (cart) {
+        const updatedCart = {
+          ...cart,
+          soluong: cart.soluong + quantity,
+        };
+        await axiosInstance.put(`/cart/${cart.id}`, updatedCart);
       } else {
-        cart.push({
-          id: productId,
+        const newProduct = {
+          userId: user.id,
+          productId: productId,
           name: productDetail.name,
           price: productDetail.price,
           image: productDetail.image,
           soluong: quantity,
-        });
+        };
+
+        await axiosInstance.post("/cart", newProduct);
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
+
       alert("Đã thêm sản phẩm vào giỏ hàng");
-      window.location.reload();
+    } catch (error) {
+      console.log("🚀 ~ themgiohang ~ error:", error);
     }
   };
 
@@ -151,9 +176,9 @@ const DetailProduct = () => {
               <div className="col">Mô tả chi tiết về sản phẩm.</div>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

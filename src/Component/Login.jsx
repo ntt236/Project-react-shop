@@ -5,7 +5,7 @@ import { Button, Input, Label } from "reactstrap";
 import "../Style/sign-in.css";
 import axiosInstance from "../api/axiosInstance";
 import * as Yup from "yup";
-import { Link, Route, useNavigate } from "react-router-dom";
+import { Link, Outlet, Route, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { loginSucces } from "../stores/actions/authActions";

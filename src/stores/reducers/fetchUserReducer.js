@@ -1,6 +1,7 @@
 const initialState = {
   user: [],
   error: false,
+  cart: [],
 };
 const fetchUserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -9,6 +10,7 @@ const fetchUserReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+
     case "FETCH_USER_FAILURE":
       return {
         ...state,
@@ -18,4 +20,5 @@ const fetchUserReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default fetchUserReducer;

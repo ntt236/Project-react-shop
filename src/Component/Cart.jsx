@@ -6,14 +6,11 @@ import { LuMinus } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../utils/common";
 import Footer from "./Footer";
+import axiosInstance from "../api/axiosInstance";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(cart);
-  }, []);
+  console.log("🚀 ~ Cart ~ cartItems:", cartItems);
 
   const handleIncrease = (index) => {
     const updatedCart = [...cartItems];
@@ -38,10 +35,30 @@ const Cart = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
+  const getUser = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    const getApi = async () => {
+      try {
+        const response = await axiosInstance.get(`/cart?userId=${getUser.id}`);
+        setCartItems(response);
+      } catch (error) {
+        console.log("🚀 ~ useEffect ~ error:", error);
+      }
+    };
+    getApi();
+  }, [getUser?.id]);
+
   const totalPriceAll = cartItems.reduce(
     (total, item) => total + Number(item.price) * Number(item.soluong),
     0
   );
+
+  const totalCart = cartItems.reduce(
+    (total, item) => total + Number(item.soluong),
+    0
+  );
+  console.log("🚀 ~ Cart ~ totalCart:", totalCart);
 
   return (
     <>
@@ -118,9 +135,6 @@ const Cart = () => {
                             </Button>
                           </div>
                         </div>
-                        <Button style={{ margin: "10px 10px 10px 0" }}>
-                          Thanh Toán{" "}
-                        </Button>
                       </div>
                     </div>
                   );

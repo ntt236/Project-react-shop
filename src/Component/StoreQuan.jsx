@@ -4,6 +4,7 @@ import Header from "./Header";
 import { Link } from "react-router-dom";
 import "../Style/ResponsiveStore.css";
 import Footer from "./Footer";
+import { formatPrice } from "../utils/common";
 
 const StoreQuan = () => {
   const [product, setProduct] = useState([]);
@@ -20,6 +21,17 @@ const StoreQuan = () => {
       console.log(error);
     }
   }, []);
+  const [sortOrder, setSortOrder] = useState("");
+
+  const sortProducts = (products, order) => {
+    return products.sort((a, b) => {
+      return order === "asc" ? a.price - b.price : b.price - a.price;
+    });
+  };
+
+  useEffect(() => {
+    setProduct((product) => sortProducts([...product], sortOrder));
+  }, [sortOrder]);
   return (
     <>
       <div>
@@ -50,7 +62,18 @@ const StoreQuan = () => {
                 </div>
               </div>
               <div className="right" style={{ background: "#f5f5f5" }}>
-                <h1>QUẦN CẦU LÔNG</h1>
+                <p style={{ fontSize: "20px" }}>
+                  Sắp xếp theo:
+                  <select
+                    value={sortOrder}
+                    onChange={(e) => setSortOrder(e.target.value)}
+                  >
+                    <option value="">--Lựa chọn--</option>
+                    <option value="asc">Giá tăng dần</option>
+                    <option value="desc">Giá giảm dần</option>
+                  </select>
+                </p>
+                <h1 style={{ padding: "30px 0" }}>VỢT CẦU LÔNG</h1>
                 <div>
                   <div className="product  ">
                     {product.map((product) => {
@@ -73,9 +96,9 @@ const StoreQuan = () => {
                                       <div className="ae">{product.name}</div>
                                     </div>
                                   </div>
-                                  <span className="price-product">
-                                    {product.price}
-                                  </span>
+                                  <p className="price-product">
+                                    {formatPrice(product.price)}
+                                  </p>
                                 </Link>
                               </div>
                             </div>

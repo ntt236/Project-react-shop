@@ -6,11 +6,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../Img/lgooo.png";
 import "../Style/HeaderResponsive.css";
+import { useDispatch } from "react-redux";
+import { logout } from "../stores/actions/authActions";
 
 const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const localUser = localStorage.getItem("user");
@@ -22,9 +25,9 @@ const Header = () => {
       setUser(null);
     }
   }, []);
-
   const handleLogout = () => {
     localStorage.removeItem("user");
+    dispatch(logout());
     setIsLogged(false);
     setUser(null);
   };
@@ -89,7 +92,7 @@ const Header = () => {
           </div>
           <div className="cuoi">
             <Link to="/cart">
-              <ShoppingCartIcon className="icon-header" />
+              <ShoppingCartIcon className="icon-header" number="2" />
             </Link>
             <div className="taikhoan">
               <Person2OutlinedIcon className="icon-header" />

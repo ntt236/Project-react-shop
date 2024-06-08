@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Table } from "reactstrap";
 import axiosInstance from "../api/axiosInstance";
 import { Link } from "react-router-dom";
+import { deleteProductInfo } from "../stores/actions/deleteAction";
+import { useDispatch } from "react-redux";
 
 const DonHangAdmin = () => {
   const [orderList, setOrderList] = useState([]);
@@ -10,6 +12,7 @@ const DonHangAdmin = () => {
     const getApi = async () => {
       try {
         const response = await axiosInstance.get("/order");
+
         setOrderList(response);
       } catch (error) {
         console.error("Failed to fetch orders:", error);
@@ -19,7 +22,6 @@ const DonHangAdmin = () => {
   }, []);
 
   const handleUpdateStatus = async (orderId) => {
-    // Tìm đơn hàng cần cập nhật
     const orderToUpdate = orderList.find((order) => order.id === orderId);
     if (!orderToUpdate) return;
 
@@ -32,7 +34,6 @@ const DonHangAdmin = () => {
     try {
       await axiosInstance.put(`/order/${orderId}`, updatedOrder);
 
-      // Cập nhật trạng thái đơn hàng trong danh sách
       setOrderList((prevOrders) =>
         prevOrders.map((order) =>
           order.id === orderId ? { ...order, status: "Đang giao" } : order
@@ -40,6 +41,16 @@ const DonHangAdmin = () => {
       );
     } catch (error) {
       console.error("Failed to update order status:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    console.log("🚀 ~ handleDelete ~ id:", id);
+    try {
+      const response = await axiosInstance.delete(`/order/${id}`);
+      setOrderList();
+    } catch (error) {
+      console.log("🚀 ~ handleDelete ~ error:", error);
     }
   };
 
@@ -96,7 +107,9 @@ const DonHangAdmin = () => {
                       </Button>
                     </td>
                     <td>
-                      <Button>Delete</Button>
+                      <Button onClick={() => handleDelete(order.id)}>
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 ))}
