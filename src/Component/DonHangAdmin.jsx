@@ -25,7 +25,6 @@ const DonHangAdmin = () => {
     const orderToUpdate = orderList.find((order) => order.id === orderId);
     if (!orderToUpdate) return;
 
-    // Cập nhật trạng thái đơn hàng
     const updatedOrder = {
       ...orderToUpdate,
       status: "Đang giao",

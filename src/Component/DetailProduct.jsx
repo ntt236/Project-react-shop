@@ -14,6 +14,7 @@ import {
 import { formatPrice } from "../utils/common";
 import Footer from "./Footer";
 import axiosInstance from "../api/axiosInstance";
+import { addToCart, updateCartItem } from "../stores/actions/cartAction";
 
 const DetailProduct = () => {
   const dispatch = useDispatch();
@@ -59,7 +60,6 @@ const DetailProduct = () => {
       }
 
       const cartResponse = await axiosInstance.get("/cart");
-      console.log("🚀 ~ themgiohang ~ cartResponse:", cartResponse);
       const cart = cartResponse.find(
         (item) => item.productId === productId && item.userId === user.id
       );
@@ -70,7 +70,8 @@ const DetailProduct = () => {
           ...cart,
           soluong: cart.soluong + quantity,
         };
-        await axiosInstance.put(`/cart/${cart.id}`, updatedCart);
+        dispatch(updateCartItem(updatedCart));
+        // await axiosInstance.put(`/cart/${cart.id}`, updatedCart);
       } else {
         const newProduct = {
           userId: user.id,
@@ -80,8 +81,8 @@ const DetailProduct = () => {
           image: productDetail.image,
           soluong: quantity,
         };
-
-        await axiosInstance.post("/cart", newProduct);
+        dispatch(addToCart(newProduct));
+        // await axiosInstance.post("/cart", newProduct);
       }
 
       alert("Đã thêm sản phẩm vào giỏ hàng");

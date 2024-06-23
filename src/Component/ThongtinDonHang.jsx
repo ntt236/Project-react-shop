@@ -22,7 +22,10 @@ const ThongtinDonHang = () => {
     <>
       <div>
         <Header />
-        <div className="container" style={{ marginTop: "100px" }}>
+        <div
+          className="container"
+          style={{ marginTop: "100px", height: "100vh" }}
+        >
           <h1>Thông tin đơn hàng</h1>
           {orderInfo.map((product) => {
             return (

@@ -16,3 +16,21 @@ export const fetchUsers = () => {
     }
   };
 };
+
+// export const getUserCart = () => {
+//   return async (dispatch) => {
+//     try {
+//       const getUser = JSON.parse(localStorage.getItem("user"));
+//       const response = await axiosInstance.get(`/cart?userId=${getUser.id}`);
+//       dispatch({
+//         type: "GET_USER_SUCCESS",
+//         payload: response,
+//       });
+//     } catch (error) {
+//       dispatch({
+//         type: "FETCH_USER_FAILURE",
+//         payload: error.message,
+//       });
+//     }
+//   };
+// };

@@ -12,6 +12,7 @@
 
 
 
+
 .container {
     max-width: 1280px;
     /* margin-top: 30px; */
@@ -203,6 +204,7 @@ header .row-flex {
 }
 
 
+
 /* end header */
 
 .slide {
@@ -235,6 +237,24 @@ header .row-flex {
 .icon-header {
     font-size: xxx-large !important;
     color: black;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    background-color: rgb(177, 32, 32);
+    width: 20px;
+    height: 20px;
+
+    top: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: white;
 }
 
 .promo-box .item {
