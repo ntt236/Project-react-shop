@@ -7,33 +7,11 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../utils/common";
 import Footer from "./Footer";
 import axiosInstance from "../api/axiosInstance";
+import Header from "./Header";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   console.log("🚀 ~ Cart ~ cartItems:", cartItems);
-
-  const handleIncrease = (index) => {
-    const updatedCart = [...cartItems];
-    updatedCart[index].soluong += 1;
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
-  const handleDecrease = (index) => {
-    const updatedCart = [...cartItems];
-    if (updatedCart[index].soluong > 1) {
-      updatedCart[index].soluong -= 1;
-      setCartItems(updatedCart);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-    }
-  };
-
-  const handleDelete = (index) => {
-    const updatedCart = [...cartItems];
-    updatedCart.splice(index, 1);
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
 
   const getUser = JSON.parse(localStorage.getItem("user"));
 
@@ -59,6 +37,49 @@ const Cart = () => {
     0
   );
   console.log("🚀 ~ Cart ~ totalCart:", totalCart);
+  const handleIncrease = async (index) => {
+    try {
+      const updatedItem = {
+        ...cartItems[index],
+        soluong: cartItems[index].soluong + 1,
+      };
+      await axiosInstance.put(`/cart/${updatedItem.id}`, updatedItem);
+      const updatedCart = [...cartItems];
+      updatedCart[index] = updatedItem;
+      setCartItems(updatedCart);
+    } catch (error) {
+      console.error("Error increasing item quantity:", error);
+    }
+  };
+
+  const handleDecrease = async (index) => {
+    if (cartItems[index].soluong > 1) {
+      try {
+        const updatedItem = {
+          ...cartItems[index],
+          soluong: cartItems[index].soluong - 1,
+        };
+        await axiosInstance.put(`/cart/${updatedItem.id}`, updatedItem);
+        const updatedCart = [...cartItems];
+        updatedCart[index] = updatedItem;
+        setCartItems(updatedCart);
+      } catch (error) {
+        console.error("Error decreasing item quantity:", error);
+      }
+    }
+  };
+
+  const handleDelete = async (index) => {
+    try {
+      const itemId = cartItems[index].id;
+      await axiosInstance.delete(`/cart/${itemId}`);
+      const updatedCart = [...cartItems];
+      updatedCart.splice(index, 1);
+      setCartItems(updatedCart);
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
 
   return (
     <>
@@ -68,7 +89,11 @@ const Cart = () => {
             <div className="row d-flex justify-content-center align-items-center h-200">
               <div className="col-10">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
+                  <h3 className="fw-normal mb-0 text-black">
+                    <br />
+                    Tổng sản phẩm trong giỏ hàng hiện tại là ({totalCart})
+                  </h3>
+
                   <h5 className="fw-normal mb-0 text-black">
                     <Link to="/" style={{ color: "red" }}>
                       Back to Home

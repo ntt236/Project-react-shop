@@ -6,8 +6,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../Img/lgooo.png";
 import "../Style/HeaderResponsive.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../stores/actions/authActions";
+import axiosInstance from "../api/axiosInstance";
+import { getUserCart } from "../stores/actions/fetchUserAction";
+import { formatPrice } from "../utils/common";
+import { fetchCart } from "../stores/actions/cartAction";
 
 const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
@@ -40,6 +44,21 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log("🚀 ~ Header ~ cartItems:", cartItems);
+  const shouldRefreshAPI = useSelector((state) => state.cart.shouldRefreshAPI);
+  const getUser = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (getUser?.id && shouldRefreshAPI !== null) {
+      dispatch(fetchCart(getUser?.id));
+    }
+  }, [dispatch, getUser?.id, shouldRefreshAPI]);
+
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + Number(item.soluong),
+    0
+  );
+
   return (
     <header>
       <div className="container">
@@ -52,6 +71,7 @@ const Header = () => {
               <img src={Logo} alt="Logo" />
             </Link>
           </div>
+
           <div className={`header-nav ${isMenuOpen ? "active" : ""}`}>
             <nav>
               <ul>
@@ -91,9 +111,15 @@ const Header = () => {
             </nav>
           </div>
           <div className="cuoi">
-            <Link to="/cart">
-              <ShoppingCartIcon className="icon-header" number="2" />
-            </Link>
+            <div className="cart">
+              <Link to="/cart">
+                <ShoppingCartIcon className="icon-header" />
+                {cartTotal > 0 && (
+                  <span className="cart-count">{cartTotal}</span>
+                )}
+                {/* <i class="bi bi-bag-check-fill icon-header"></i> */}
+              </Link>
+            </div>
             <div className="taikhoan">
               <Person2OutlinedIcon className="icon-header" />
               <span className="p-tk">

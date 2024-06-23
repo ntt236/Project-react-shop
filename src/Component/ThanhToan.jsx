@@ -45,7 +45,7 @@ const ThanhToan = () => {
       }
 
       const data = {
-        nameProduct: cart[0]?.name,
+        nameProduct: cart.map((item) => item.name).join(", "),
         phone: phoneNumber,
         address: address,
         email: getUser.email,
@@ -56,6 +56,7 @@ const ThanhToan = () => {
 
       await axiosInstance.post("/order", data);
       alert("Đã đặt hàng thành công!");
+
       const fetchCart = await axiosInstance.get("cart");
       const filterCart = fetchCart.filter((cart) => cart.userId === getUser.id);
 

@@ -76,10 +76,7 @@ const StoreAo = () => {
                     <option value="desc">Giá giảm dần</option>
                   </select>
                 </p>
-                <span style={{ width: "20%" }}>
-                  <SlideMoney />
-                </span>
-                <h1 style={{ padding: "30px 0" }}>VỢT CẦU LÔNG</h1>
+                <h1 style={{ padding: "30px 0" }}>ÁO CẦU LÔNG</h1>
                 <div>
                   <div className="product  ">
                     {product.map((product) => {
