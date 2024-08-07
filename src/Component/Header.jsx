@@ -45,7 +45,7 @@ const Header = () => {
   };
 
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log("🚀 ~ Header ~ cartItems:", cartItems);
+  // console.log("🚀 ~ Header ~ cartItems:", cartItems);
   const shouldRefreshAPI = useSelector((state) => state.cart.shouldRefreshAPI);
   const getUser = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {

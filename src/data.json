@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": "28e6",
+      "fullname": "nguyenthantriue",
+      "email": "nguyentrieu2306@gmail.com",
+      "password": "123123",
+      "conFirmPassword": "123123"
+    },
+    {
+      "id": "c658",
+      "fullname": "àasfsdaf",
+      "email": "sfdsadf@gmail.com",
+      "password": "123123",
+      "conFirmPassword": "123123"
+    }
+  ],
+  "admin": [
+    {}
+  ]
+}
