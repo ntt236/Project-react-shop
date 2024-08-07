@@ -1,21 +1,241 @@
 {
+  "admin": [
+    {
+      "email": "admin@123.com",
+      "password": "trieu@2306",
+      "id": "8099"
+    }
+  ],
   "users": [
     {
-      "id": "28e6",
-      "fullname": "nguyenthantriue",
-      "email": "nguyentrieu2306@gmail.com",
+      "id": "1",
+      "fullname": "triều",
+      "email": "asd@gmail.com",
       "password": "123123",
       "conFirmPassword": "123123"
     },
     {
-      "id": "c658",
-      "fullname": "àasfsdaf",
-      "email": "sfdsadf@gmail.com",
+      "id": "7",
+      "fullname": "nguyễn",
+      "email": "1asd@gmail.com",
+      "password": "123123",
+      "conFirmPassword": "123123"
+    },
+    {
+      "id": "d5ff",
+      "fullname": "nguyentrieu",
+      "email": "abc123@gmail.com",
       "password": "123123",
       "conFirmPassword": "123123"
     }
   ],
-  "admin": [
-    {}
+  "order": [
+    {
+      "id": "b250",
+      "nameProduct": "",
+      "phone": "213123123",
+      "address": "12312",
+      "email": "abc123@gmail.com",
+      "totalPrice": 0,
+      "date": "2024-06-20T13:00:51.999Z",
+      "status": "Đang chờ xác nhận"
+    }
+  ],
+  "cart": [
+    {
+      "id": "285b",
+      "userId": "7",
+      "productId": "6546",
+      "name": "Vợt NANOFLARE 002",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/l/all_nf-002c_004-1.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819",
+      "soluong": 3
+    },
+    {
+      "id": "f48c",
+      "userId": "7",
+      "productId": "5873465",
+      "name": "GIÀY . .",
+      "price": "1990000",
+      "image": "https://www.yonex.com/media/catalog/product/b/a/background_113_1_2.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819",
+      "soluong": 1
+    },
+    {
+      "id": "2ea7",
+      "userId": "7",
+      "productId": "3123123",
+      "name": "Vợt Kumpo",
+      "price": "1600000",
+      "image": "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-kumpoo-lanting-noi-dia-trung-4.webp",
+      "soluong": 1
+    },
+    {
+      "id": "4913",
+      "userId": "7",
+      "productId": "84564",
+      "name": "MEN'S KNIT SHORTS",
+      "price": "200000",
+      "image": "https://www.yonex.com/media/catalog/product/1/5/15170_011_01.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819",
+      "soluong": 1
+    },
+    {
+      "id": "e473",
+      "userId": "1",
+      "productId": "234234",
+      "name": "Vợt cầu lông Vợt Kumpoo LAN TING",
+      "price": "1990000",
+      "image": "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-kumpoo-lanting-noi-dia-trung-4.webp",
+      "soluong": 1
+    },
+    {
+      "id": "1458",
+      "userId": "1",
+      "productId": "242342546546",
+      "name": "Áo ...",
+      "price": "2990000",
+      "image": "https://product.hstatic.net/1000362402/product/aayt025-4l-1_cb9e43bf044343e3ad04a64799a0ec78_master_c718f894d5f14bf3b76109c007ae42b1_master.jpg",
+      "soluong": 1
+    },
+    {
+      "id": "5bcd",
+      "userId": "1",
+      "productId": "6546",
+      "name": "Vợt NANOFLARE 002",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/l/all_nf-002c_004-1.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819",
+      "soluong": 2
+    }
+  ],
+  "products": [
+    {
+      "id": "6546",
+      "name": "Vợt NANOFLARE 002",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/l/all_nf-002c_004-1.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "345",
+      "name": "ÁO...",
+      "price": "1600000",
+      "image": "https://www.yonex.com/media/catalog/product/1/0/10563_007_.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "5873465",
+      "name": "GIÀY . .",
+      "price": "1990000",
+      "image": "https://www.yonex.com/media/catalog/product/b/a/background_113_1_2.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "535323",
+      "name": "VỢT CẦU LÔNG YONEX ASTROX 88 PLAY",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/3/a/3ax88-pl_076_1_02.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "12313",
+      "name": "Vợt cầu lông yonex ASTROX 3 DG ST",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/x/ax3dg-st.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    }
+  ],
+  "productsell": [
+    {
+      "id": "3123123",
+      "name": "Vợt Kumpo",
+      "price": "1600000",
+      "image": "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-kumpoo-lanting-noi-dia-trung-4.webp"
+    },
+    {
+      "id": "2873548275",
+      "name": "Vợt cầu lông KAMITO VTT",
+      "price": "1600000",
+      "image": "https://product.hstatic.net/1000341630/product/kamito_0188_5f3cf3fa9064435fac4720c852ade17f_master.jpg"
+    },
+    {
+      "id": "45907384564",
+      "name": "Giày . .",
+      "price": "2990000",
+      "image": "https://product.hstatic.net/200000099191/product/dsc01712_8232dba951ff41649667028aa534291b.jpg"
+    }
+  ],
+  "vot": [
+    {
+      "id": "234234",
+      "name": "Vợt cầu lông Vợt Kumpoo LAN TING",
+      "price": "1990000",
+      "image": "https://cdn.shopvnb.com/uploads/gallery/vot-cau-long-kumpoo-lanting-noi-dia-trung-4.webp"
+    },
+    {
+      "id": "345",
+      "name": "Vợt cầu lông KAMITO VTT",
+      "price": "1600000",
+      "image": "https://product.hstatic.net/1000341630/product/kamito_0188_5f3cf3fa9064435fac4720c852ade17f_master.jpg"
+    },
+    {
+      "id": "2234",
+      "name": "Vợt cầu lông yonex ASTROX 3 DG HF",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/x/ax3dg_hf.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "624986578326",
+      "name": "Vợt cầu lông Victo BRAVESWORD 12",
+      "price": "2990000",
+      "image": "https://tuvanmuasam.com/wp-content/uploads/2020/08/V%E1%BB%A3t-c%E1%BA%A7u-l%C3%B4ng-Victor-BRAVESWORD-12-300x300.jpg"
+    },
+    {
+      "id": "535323",
+      "name": "Vợt cầu lông yonex ASTROX 88 PLAY",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/3/a/3ax88-pl_076_1_02.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "12313",
+      "name": "Vợt cầu lông yonex ASTROX 3 DG ST",
+      "price": "2990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/x/ax3dg-st.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    }
+  ],
+  "giay": [
+    {
+      "id": "238742765873465",
+      "name": "Giày ...",
+      "price": "1990000",
+      "image": "https://www.yonex.com/media/catalog/product/b/a/background_113_1_2.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "27374728",
+      "name": "Giày . .",
+      "price": "1990000",
+      "image": "https://www.yonex.com/media/catalog/product/a/l/all_shbaz2m_470_kai.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    }
+  ],
+  "ao": [
+    {
+      "id": "242342546546",
+      "name": "Áo ...",
+      "price": "2990000",
+      "image": "https://product.hstatic.net/1000362402/product/aayt025-4l-1_cb9e43bf044343e3ad04a64799a0ec78_master_c718f894d5f14bf3b76109c007ae42b1_master.jpg"
+    }
+  ],
+  "quan": [
+    {
+      "id": "84564",
+      "name": "MEN'S KNIT SHORTS",
+      "price": "200000",
+      "image": "https://www.yonex.com/media/catalog/product/1/5/15170_011_01.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "07384564",
+      "name": "MEN'S SHORT",
+      "price": "199000",
+      "image": "https://www.yonex.com/media/catalog/product/1/5/15161_749_m200.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    },
+    {
+      "id": "45907384564",
+      "name": "UNISEX SHORT",
+      "price": "199000",
+      "image": "https://www.yonex.com/media/catalog/product/1/5/15167_149_m200_1.png?quality=80&fit=bounds&height=819&width=600&canvas=600:819"
+    }
   ]
 }
