@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -11,7 +11,7 @@ import { logout } from "../stores/actions/authActions";
 import axiosInstance from "../api/axiosInstance";
 import { getUserCart } from "../stores/actions/fetchUserAction";
 import { formatPrice } from "../utils/common";
-import { fetchCart } from "../stores/actions/cartAction";
+import { clearCart, fetchCart } from "../stores/actions/cartAction";
 
 const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
@@ -29,12 +29,6 @@ const Header = () => {
       setUser(null);
     }
   }, []);
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    dispatch(logout());
-    setIsLogged(false);
-    setUser(null);
-  };
 
   const handleLogin = () => {
     setIsLogged(true);
@@ -58,6 +52,16 @@ const Header = () => {
     (total, item) => total + Number(item.soluong),
     0
   );
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    dispatch(logout());
+    dispatch(clearCart())
+    setIsLogged(false);
+    setUser(null);
+  
+    
+    
+  };
 
   return (
     <header>

@@ -2,6 +2,7 @@
 
 import {
   ADD_TO_CART_SUCCESS,
+  CLEAR_CART,
   DELETE_CART_ITEM_SUCCESS,
   FETCH_CART_SUCCESS,
   UPDATE_CART_ITEM_SUCCESS,
@@ -41,6 +42,11 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
       };
     default:
       return state;

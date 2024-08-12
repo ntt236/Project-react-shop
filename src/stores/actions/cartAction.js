@@ -7,6 +7,7 @@ export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
 export const UPDATE_CART_ITEM_SUCCESS = "UPDATE_CART_ITEM_SUCCESS";
 export const DELETE_CART_ITEM_SUCCESS = "DELETE_CART_ITEM_SUCCESS";
 export const UPDATE_SHOULD_REFRESH_SUCCESS = "UPDATE_SHOULD_REFRESH_SUCCESS";
+export const CLEAR_CART = "CLEAR_CART";
 
 export const fetchCart = (userId) => async (dispatch) => {
   try {
@@ -55,3 +56,8 @@ export const deleteCartItem = (itemId) => async (dispatch) => {
     console.error("Error deleting cart item:", error);
   }
 };
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+}
